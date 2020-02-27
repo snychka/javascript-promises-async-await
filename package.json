@@ -1,7 +1,7 @@
 {
-  "name": "refactor-promises-to-async-await",
+  "name": "hello-pluralsight-project",
   "version": "1.0.0",
-  "description": "Refactor Promises to Async Await",
+  "description": "Sample Pluralsight Project",
   "main": "index.js",
   "scripts": {
     "test": "npm-run-all -s test:code",
@@ -10,7 +10,7 @@
     "test-watch": "npm-run-all  -p -r test-watch:code",
     "test-watch:code": "mocha test/ --bail --watch --watch-extensions html"
   },
-  "author": "Marques Woodson",
+  "author": "Adam Fortuna",
   "license": "MIT",
   "devDependencies": {
     "acorn": "^7.1.0",
