@@ -7,7 +7,7 @@ import {
 } from "./services";
 const movies = require("./data/movies.json");
 
-export function fetchMovies() {
+export function fetchMovies_() {
   const resolveFunction = () => movies;
   return fetchWithTimeout(1000).then(resolveFunction);
 }
@@ -63,7 +63,7 @@ async function getBooksOrMoviesAsync() {
 }
 
 function fetchMoviesWithError() {
-  return fetch_(1000).then(() => moviies);
+  return fetchWithTimeout(1000).then(() => moviies);
 }
 
 fetchMovies_().then(res => console.log("Received list of movies", res));
