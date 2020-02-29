@@ -20,7 +20,7 @@ Create a file called `services.js` in the `/src` directory.
 
 Inside of `services.js` export a function named `fetch`. `fetch` should take a single argument, delay. `delay` will represent the number of milliseconds to wait before resolving.
 
-## Task 3: Adding a promise to fetchMovies
+## Task 3: Adding a promise to fetch movies
 
 In the function body of `fetch`, return a new promise. The promise callback should be an arrow function with a `resolve` parameter.
 

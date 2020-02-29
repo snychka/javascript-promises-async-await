@@ -1,5 +1,5 @@
 import {
-  fetch_,
+  fetchWithTimeout,
   fetchBooks,
   fetchMovies,
   asyncFetchBooks,
@@ -8,7 +8,8 @@ import {
 const movies = require("./data/movies.json");
 
 export function fetchMovies() {
-  return fetch_(1000).then(() => movies);
+  const resolveFunction = () => movies;
+  return fetchWithTimeout(1000).then(resolveFunction);
 }
 
 const moviePromise = fetchMovies();
