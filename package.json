@@ -4,16 +4,16 @@
   "description": "Refactor Promises to Async Await",
   "main": "index.js",
   "scripts": {
-    "test": "npm-run-all -s test:code",
-    "test:code": "mocha test/",
     "clean": "rimraf build",
     "go": "npm-run-all build exec",
     "exec": "node ./build/index.js",
     "build": "npm-run-all clean transpile",
     "transpile": "babel ./src --out-dir build",
     "deploy:github-pages": "git push origin master:gh-pages",
+    "test": "npm-run-all -s test:code",
+    "test:code": "mocha tests/**",
     "test-watch": "npm-run-all  -p -r test-watch:code",
-    "test-watch:code": "mocha test/ --bail --watch --watch-extensions html"
+    "test-watch:code": "mocha tests/** --bail --watch --watch-extensions html"
   },
   "babel": {
     "presets": [
