@@ -12,6 +12,8 @@
     "deploy:github-pages": "git push origin master:gh-pages",
     "test": "npm-run-all -s test:code",
     "test:code": "mocha tests/**",
+    "test:module2": "mocha tests/module2/**",
+    "test:module3": "mocha tests/module3/**",
     "test-watch": "npm-run-all  -p -r test-watch:code",
     "test-watch:code": "mocha tests/** --bail --watch --watch-extensions html"
   },
