@@ -22,6 +22,9 @@
     "npm-run-all": "^4.0.2",
     "parcel-bundler": "^1.12.4"
   },
+  "browserslist": [
+    "last 2 Chrome versions"
+  ],
   "dependencies": {
     "lodash": "^4.17.15"
   }
