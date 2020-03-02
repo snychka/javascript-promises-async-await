@@ -1,37 +1,23 @@
-## Task 1: Creating the relevant module
+## Task 1: Creating the entry point
 
-Create a file called `promises.js` in the `/src` directory.
+Create a file in the `/src/` directory called `index.js`
 
-## Task 2: Creating the fetchMovies function
+## Task 2: Declare the fetchMovies method
 
-Inside of `promises.js` export a function named `fetchMovies`. `fetchMovies` should take 0 (zero) arguments.
+Create an empty, exported function named `fetchMovies()`.
 
-## Task 3: Adding a promise to fetchMovies
+## Task 3: Add services file
 
-In the function body of `fetchMovies`, return a new promise. The promise callback should be an arrow function with a `resolve` parameter and a `reject` parameter.
+Create a file in the `/src/` directory called `services.js`.
 
-## Task 4: Simulate an API request within the promise
+## Task 4: Create method to simulate promise with a delay
 
-Inside the promise callback, add a `setTimeout` for 1000 milliseconds, where the callback of the `setTimeout` contains this content:
+Inside of `services.js`, create an exported function named `fetchWithTimeout` that accepts a single argument named `delay`.
+
+## Task 5: Add promise to the fetchWithTimeout method
+
+Inside the body of `fetchWithTimeout` return a promise that uses a timeout that simulates an HTTP delay. Use the following code:
 
 ```js
-resolve([
-  {
-    title: "Die Hard"
-  },
-  {
-    title: "Home Alone"
-  },
-  {
-    title: "Love Actually"
-  }
-]);
+return new Promise(resolve => setTimeout(resolve, delay));
 ```
-
-## Task 5: Call fetch movies and log the results
-
-Below the `fetchMovies` function declaration, call `fetchMovies` and set the result to a variable called `moviePromise`.
-
-## Task 6: Resolve moviePromise
-
-Call `moviePromise.then()`. The `.then` callback function has a single parameter, which is the promises resolved value. Name this parameter `results`, and `console.log` the results.
