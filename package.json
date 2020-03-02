@@ -13,45 +13,16 @@
     "test-watch": "npm-run-all  -p -r test-watch:code",
     "test-watch:code": "mocha tests/** --bail --watch --watch-extensions html"
   },
-  "babel": {
-    "presets": [
-      [
-        "@babel/env",
-        {
-          "modules": "auto",
-          "targets": {
-            "edge": "17",
-            "firefox": "60",
-            "chrome": "67",
-            "safari": "11.1"
-          },
-          "useBuiltIns": "entry",
-          "corejs": 2
-        }
-      ]
-    ],
-    "plugins": [
-      [
-        "@babel/plugin-transform-runtime"
-      ]
-    ],
-    "sourceType": "module"
-  },
   "author": "Marques Woodson",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.6",
-    "@babel/plugin-transform-runtime": "^7.8.3",
-    "@babel/preset-env": "^7.8.6",
     "acorn": "^7.1.0",
     "chai": "^4.2.0",
     "jquery": "^3.3.1",
     "jsdom": "^11.12.0",
     "mocha": "^7.0.1",
     "npm-run-all": "^4.0.2",
-    "parcel-bundler": "^1.12.4",
-    "rimraf": "^3.0.2"
+    "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
     "core-js": "^2.6.11",
