@@ -24,7 +24,7 @@ coverage
 .grunt
 .cache
 build
-
+dist
 # node-waf configuration
 .lock-wscript
 
