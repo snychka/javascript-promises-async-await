@@ -7,6 +7,7 @@ To run the project:
 ```bash
 npm run start
 ```
+
 ## Running Tests
 
 Run tests using the command:
