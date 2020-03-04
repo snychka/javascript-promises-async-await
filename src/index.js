@@ -19,7 +19,7 @@ moviePromise.then(results => {
 
 function getBooksAndMovies() {
   return Promise.all([fetchBooks(), fetchMovies()])
-    .then(({ books, movies }) => ({
+    .then(([books, movies]) => ({
       books,
       movies
     }))
@@ -66,6 +66,13 @@ async function getBooksOrMoviesAsync() {
     console.log("Error waiting for the promise race", error);
   }
 }
+
+getBooksAndMoviesAsync().then(results => {
+  console.log("movies and books", {
+    movies: results.movies,
+    books: results.books
+  });
+});
 
 function fetchMoviesWithError() {
   return fetchWithTimeout(1000).then(() => moviies);
