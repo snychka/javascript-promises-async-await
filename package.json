@@ -7,7 +7,6 @@
     "test": "npm-run-all -s test:code",
     "test:code": "mocha tests/**",
     "start": "parcel index.html",
-    "deploy:github-pages": "git push origin master:gh-pages",
     "test-watch": "npm-run-all  -p -r test-watch:code",
     "test-watch:code": "mocha tests/** --bail --watch --watch-extensions html"
   },
