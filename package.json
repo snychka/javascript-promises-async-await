@@ -20,11 +20,20 @@
     "jsdom": "^11.12.0",
     "mocha": "^7.0.1",
     "npm-run-all": "^4.0.2",
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.3.1"
   },
   "browserslist": [
     "last 2 Chrome versions"
   ],
+  "staticFiles": {
+    "staticPath": [
+      {
+        "staticPath": "src/data",
+        "staticOutDir": "data"
+      }
+    ]
+  },
   "dependencies": {
     "lodash": "^4.17.15"
   }
