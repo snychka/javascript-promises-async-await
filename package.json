@@ -4,11 +4,13 @@
   "description": "Refactor Promises to Async Await",
   "main": "index.js",
   "scripts": {
+    "start": "parcel index.html",
     "test": "npm-run-all -s test:code",
     "test:code": "mocha tests/**",
-    "start": "parcel index.html",
     "test-watch": "npm-run-all  -p -r test-watch:code",
-    "test-watch:code": "mocha tests/** --bail --watch --watch-extensions html"
+    "test-watch:code": "mocha tests/** --bail --watch --watch-extensions html",
+    "test:module2": "mocha tests/module2.spec.js",
+    "test:module3": "mocha tests/module3.spec.js"
   },
   "author": "Marques Woodson",
   "license": "MIT",
