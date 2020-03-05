@@ -44,45 +44,44 @@ getBooksOrMoviesPromise.then(results => {
 });
 
 async function getBooksAndMoviesAsync() {
-  try {
-    const [books, movies] = await Promise.all([
-      asyncFetchBooks(),
-      asyncFetchMovies()
-    ]);
-    return {
-      books,
-      movies
-    };
-  } catch (error) {
-    console.log("Error fetching books and movies", error);
-  }
+  const [books, movies] = await Promise.all([
+    asyncFetchBookss(),
+    asyncFetchMovies()
+  ]);
+  return {
+    books,
+    movies
+  };
 }
 
 async function getBooksOrMoviesAsync() {
   try {
-    const values = await Promise.race([asyncFetchBooks(), asyncFetchMovies()]);
+    const values = await Promise.race([asyncFetchBookss(), asyncFetchMovies()]);
     return values;
   } catch (error) {
-    console.log("Error waiting for the promise race", error);
+    console.error("Error waiting for the promise race", error);
+    throw error;
   }
 }
 
-getBooksAndMoviesAsync().then(results => {
-  console.log("movies and books", {
-    movies: results.movies,
-    books: results.books
+getBooksAndMoviesAsync()
+  .then(results => {
+    console.log("movies AND books", {
+      movies: results.movies,
+      books: results.books
+    });
+  })
+  .catch(error => {
+    console.error("Error in getBooksAndMoviesAsync execution", error);
   });
-});
 
-function fetchMoviesWithError() {
-  return fetchWithTimeout(1000).then(() => moviies);
-}
-
-fetchMovies_().then(res => console.log("Received list of movies", res));
-
-fetchMoviesWithError()
-  .then(res => console.log("shouldn't receive movies", res))
-  .catch(err => console.log("Oops!", err));
+getBooksOrMoviesAsync()
+  .then(results => {
+    console.log("movies OR books", {
+      results
+    });
+  })
+  .catch(err => console.error(err));
 
 const timer1 = setTimeout(() => {
   console.log("timer 1 has finished");
@@ -92,7 +91,3 @@ const timer2 = setTimeout(() => {
   console.log("timer 2 has finished");
   clearTimeout(timer1);
 }, 2000);
-
-getBooksOrMoviesAsync()
-  .then(res => console.log("async results:", res))
-  .catch(err => console.error(err));
