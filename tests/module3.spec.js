@@ -5,11 +5,39 @@ const acorn = require("acorn");
 const _ = require("lodash");
 
 describe("Module 3", () => {
-  let file;
-  beforeEach(() => {
-    file = fs.readFileSync(path.join(process.cwd(), "src/index.js"), "utf8");
+  it("you should have a folder named 'data' in the src directory @create-data-dir", () => {
+    let indexFile = fs.existsSync(path.join(process.cwd(), "src/data"));
+    expect(indexFile).to.not.equal(
+      false,
+      "It seems you have not created the `data` directory in `src/`."
+    );
   });
+
+  it("you should have a file named 'movies.json' in the src/data directory @create-movies-json", () => {
+    let file = fs.existsSync(path.join(process.cwd(), "src/data/movies.json"));
+    const res = require("../src/data/movies.json");
+    expect(file).to.not.equal(
+      false,
+      "It seems you have not created the `movies.json` directory in `src/data`."
+    );
+
+    expect(res.length).to.equal(
+      3,
+      `It looks like movies.json is missing some data. Please make sure it holds this content: ${JSON.stringify(
+        [
+          { title: "Die Hard" },
+          { title: "Home Alone" },
+          { title: "Love Actually" }
+        ]
+      )}`
+    );
+  });
+
   it("index.js should import the movies json @import-movies", () => {
+    let file = fs.readFileSync(
+      path.join(process.cwd(), "src/index.js"),
+      "utf8"
+    );
     const res = acorn.parse(file, { sourceType: "module" });
     const variableDeclaration = res.body.filter(
       node => _.get(node, "declarations[0].id.name") === "movies"
@@ -30,6 +58,10 @@ describe("Module 3", () => {
   });
 
   it("fetchMovies() should declare a resolveFunction method @create-resolve-function", () => {
+    let file = fs.readFileSync(
+      path.join(process.cwd(), "src/index.js"),
+      "utf8"
+    );
     const res = acorn.parse(file, { sourceType: "module" });
     const functionDeclaration = res.body.filter(
       node => _.get(node, "declaration.id.name") === "fetchMovies"
@@ -56,6 +88,10 @@ describe("Module 3", () => {
   });
 
   it("index.js should import the fetchWithTimeout function @import-fetch-with-timeout", () => {
+    let file = fs.readFileSync(
+      path.join(process.cwd(), "src/index.js"),
+      "utf8"
+    );
     const res = acorn.parse(file, { sourceType: "module" });
     expect(_.get(res, "body[0].type", "")).to.equal(
       "ImportDeclaration",
@@ -72,6 +108,10 @@ describe("Module 3", () => {
   });
 
   it("fetchMovies() should return the execution of `fetchWithTimeout` @return-fetch-with-timeout", () => {
+    let file = fs.readFileSync(
+      path.join(process.cwd(), "src/index.js"),
+      "utf8"
+    );
     const res = acorn.parse(file, { sourceType: "module" });
     expect(_.get(res, "body[2].declaration.body.body[1].type", "")).to.equal(
       "ReturnStatement"
@@ -110,6 +150,10 @@ describe("Module 3", () => {
   });
 
   it("Variable `moviePromise` should be created and its value set to `fetchMovies` execution @execute-fetch-movies", () => {
+    let file = fs.readFileSync(
+      path.join(process.cwd(), "src/index.js"),
+      "utf8"
+    );
     const res = acorn.parse(file, { sourceType: "module" });
 
     const moviePromise = _.get(res, "body[3]");
@@ -123,6 +167,10 @@ describe("Module 3", () => {
   });
 
   it("When resolving the `moviePromise` promise you should be able to console log the list of movies @log-movie-promise", () => {
+    let file = fs.readFileSync(
+      path.join(process.cwd(), "src/index.js"),
+      "utf8"
+    );
     const res = acorn.parse(file, { sourceType: "module" });
     const body = _.get(res, "body[4]");
     expect(_.get(body, "expression.callee.property.name", "")).to.equal(

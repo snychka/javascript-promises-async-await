@@ -25,6 +25,7 @@ coverage
 .cache
 build
 dist
+.cache/**
 # node-waf configuration
 .lock-wscript
 
