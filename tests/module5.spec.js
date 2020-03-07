@@ -41,7 +41,7 @@ function getFunctionNames(codeString) {
 }
 
 describe("Module 5", () => {
-  it("@create-async-fetch-movies", () => {
+  it("should have an `asyncFetchMovies()` function defined @create-async-fetch-movies", () => {
     let file = fs.readFileSync(
       path.join(process.cwd(), "src/services.js"),
       "utf8"
@@ -70,7 +70,7 @@ describe("Module 5", () => {
     );
   });
 
-  it("@add-try-catch-to-async-fetch-movies", () => {
+  it("Should have a try/catch block defined in the body @add-try-catch-to-async-fetch-movies", () => {
     let file = fs.readFileSync(
       path.join(process.cwd(), "src/services.js"),
       "utf8"
@@ -96,7 +96,7 @@ describe("Module 5", () => {
     );
   });
 
-  it("@await-fetch-movies", () => {
+  it("should await for the fetch promise @await-fetch-movies", () => {
     let file = fs.readFileSync(
       path.join(process.cwd(), "src/services.js"),
       "utf8"
