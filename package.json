@@ -14,7 +14,8 @@
     "test:module3": "mocha tests/module3.spec.js",
     "test:module4": "mocha tests/module4.spec.js",
     "test:module5": "mocha tests/module5.spec.js",
-    "test:module6": "mocha tests/module6.spec.js"
+    "test:module6": "mocha tests/module6.spec.js",
+    "test:module7": "mocha tests/module7.spec.js"
   },
   "author": "Marques Woodson",
   "license": "MIT",
