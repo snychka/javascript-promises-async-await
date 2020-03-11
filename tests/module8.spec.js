@@ -64,7 +64,7 @@ describe("Module 8", () => {
     );
   });
 
-  it("@add-catch-to-execution", () => {
+  it("should have a `.catch()` method on getBooksAndMoviesAsync() execution @add-catch-to-execution", () => {
     let file = fs.readFileSync(
       path.join(process.cwd(), "src/index.js"),
       "utf8"
@@ -128,7 +128,7 @@ describe("Module 8", () => {
     );
   });
 
-  it("@return-a-rejected-promise", () => {
+  it("should return a rejected promise in `getBooksOrMoviesAsync()` @return-a-rejected-promise", () => {
     let file = fs.readFileSync(
       path.join(process.cwd(), "src/index.js"),
       "utf8"
