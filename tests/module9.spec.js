@@ -78,7 +78,7 @@ describe("Module 9", () => {
     );
     expect(
       _.get(parent.node, "declarations[0].init.arguments[1].value", "")
-    ).to.equal(20000, "The `setTimeout` in `timer1` should run for 20000 ms.");
+    ).to.equal(3000, "The `setTimeout` in `timer1` should run for 3000 ms.");
   });
 
   it("should use `clearTimeout()` to stop `timer1` early @use-clearTimeout", () => {
