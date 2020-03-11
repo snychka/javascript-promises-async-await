@@ -19,17 +19,20 @@ describe("Module 3", () => {
       false,
       "It seems you have not created the `movies.json` directory in `src/data`."
     );
+    if (file) {
+      const movies = require("../src/data/movies.json");
 
-    expect(res.length).to.equal(
-      3,
-      `It looks like movies.json is missing some data. Please make sure it holds this content: ${JSON.stringify(
-        [
-          { title: "Die Hard" },
-          { title: "Home Alone" },
-          { title: "Love Actually" }
-        ]
-      )}`
-    );
+      expect(movies.length).to.equal(
+        3,
+        `It looks like movies.json is missing some data. Please make sure it holds this content: ${JSON.stringify(
+          [
+            { title: "Die Hard" },
+            { title: "Home Alone" },
+            { title: "Love Actually" }
+          ]
+        )}`
+      );
+    }
   });
 
   it("index.js should import the movies json @import-movies", () => {
