@@ -27,10 +27,21 @@ async function getBooksAndMoviesAsync() {
 
 async function getBooksOrMoviesAsync() {
   try {
+    const values = await Promise.race([asyncFetchBooks(), asyncFetchMovies()]);
+    return values;
   } catch(error) {
     console.log("Error waiting for the promise race", error);
   }
 }
+
+getBooksAndMoviesAsync().then(
+  (results) => {
+    console.log("movies and books", {
+      movies: results.movies,
+      books: results.books
+    });
+  }
+);
 
 getBooksAndMoviesPromise.then( results => { console.log('getBooksAndMoviesPromise', results); } );
 
