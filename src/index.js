@@ -70,3 +70,5 @@ export function fetchMovies() {
 let moviePromise = fetchMovies();
 moviePromise.then( function(results) {console.log(results);});
 */
+
+const timer = setTimeout( () => {console.log("timer 1 has finished"); }, 3000);
