@@ -384,67 +384,70 @@ describe("Module 7", () => {
       }
     });
     const tryBlock = {};
-    walk.simple(func.node, {
-      TryStatement(node) {
-        tryBlock.TryStatement = node;
-      }
-    });
 
-    walk.simple(tryBlock.TryStatement, {
-      ReturnStatement(node) {
-        tryBlock.ReturnStatement = node;
-      },
-      VariableDeclarator(node) {
-        tryBlock.VariableDeclarator = node;
-      },
-      VariableDeclaration(node) {
-        tryBlock.VariableDeclaration = node;
-      },
-      AwaitExpression(node) {
-        tryBlock.AwaitExpression = node;
-      },
-      MemberExpression(node) {
-        if (_.get(node, "object.name", "") === "Promise") {
-          tryBlock.MemberExpression = node;
+    if (func.node) {
+      walk.simple(func.node, {
+        TryStatement(node) {
+          tryBlock.TryStatement = node;
         }
-      }
-    });
+      });
 
-    walk.simple(tryBlock.VariableDeclaration, {
-      CallExpression(node) {
-        tryBlock.CallExpression = node;
-      },
-      ArrayExpression(node) {
-        tryBlock.ArrayExpression = node;
-      }
-    });
+      walk.simple(tryBlock.TryStatement, {
+        ReturnStatement(node) {
+          tryBlock.ReturnStatement = node;
+        },
+        VariableDeclarator(node) {
+          tryBlock.VariableDeclarator = node;
+        },
+        VariableDeclaration(node) {
+          tryBlock.VariableDeclaration = node;
+        },
+        AwaitExpression(node) {
+          tryBlock.AwaitExpression = node;
+        },
+        MemberExpression(node) {
+          if (_.get(node, "object.name", "") === "Promise") {
+            tryBlock.MemberExpression = node;
+          }
+        }
+      });
 
-    expect(_.get(tryBlock.MemberExpression, "object.name", "")).to.equal(
-      "Promise",
-      "You need to use the Promise object to call the `race` method."
-    );
-    expect(_.get(tryBlock.MemberExpression, "property.name", "")).to.equal(
-      "race",
-      "You need to call the `race()` method on the Promise object."
-    );
+      walk.simple(tryBlock.VariableDeclaration, {
+        CallExpression(node) {
+          tryBlock.CallExpression = node;
+        },
+        ArrayExpression(node) {
+          tryBlock.ArrayExpression = node;
+        }
+      });
 
-    expect(_.get(tryBlock.VariableDeclarator, "id.name", "")).to.equal(
-      "values",
-      "You should set the value of the Promise.race call to `values`."
-    );
+      expect(_.get(tryBlock.MemberExpression, "object.name", "")).to.equal(
+        "Promise",
+        "You need to use the Promise object to call the `race` method."
+      );
+      expect(_.get(tryBlock.MemberExpression, "property.name", "")).to.equal(
+        "race",
+        "You need to call the `race()` method on the Promise object."
+      );
 
-    expect(
-      _.get(tryBlock.ArrayExpression, "elements[0].callee.name", "")
-    ).to.equal(
-      "asyncFetchBooks",
-      "You need to pass an array to `Promise.race([asyncFetchBooks(), asyncFetchMovies()])` that includes `asyncFetchBooks()` at the first index position."
-    );
-    expect(
-      _.get(tryBlock.ArrayExpression, "elements[1].callee.name", "")
-    ).to.equal(
-      "asyncFetchMovies",
-      "You need to pass an array to `Promise.race([asyncFetchBooks(), asyncFetchMovies()])` that includes `asyncFetchMovies()` at the second index position."
-    );
+      expect(_.get(tryBlock.VariableDeclarator, "id.name", "")).to.equal(
+        "values",
+        "You should set the value of the Promise.race call to `values`."
+      );
+
+      expect(
+        _.get(tryBlock.ArrayExpression, "elements[0].callee.name", "")
+      ).to.equal(
+        "asyncFetchBooks",
+        "You need to pass an array to `Promise.race([asyncFetchBooks(), asyncFetchMovies()])` that includes `asyncFetchBooks()` at the first index position."
+      );
+      expect(
+        _.get(tryBlock.ArrayExpression, "elements[1].callee.name", "")
+      ).to.equal(
+        "asyncFetchMovies",
+        "You need to pass an array to `Promise.race([asyncFetchBooks(), asyncFetchMovies()])` that includes `asyncFetchMovies()` at the second index position."
+      );
+    }
   });
 
   it("should return results of the race @promise-race-return-results", () => {
@@ -496,13 +499,17 @@ describe("Module 7", () => {
 
     const parent = {};
     const func = {};
-    walk.findNodeAt(res, null, null, (nodeType, node) => {
-      if (
-        nodeType === "CallExpression" &&
-        _.get(node, "callee.object.callee.object.callee.name", "") ===
-          "getBooksAndMoviesAsync"
-      ) {
-        parent.node = node;
+    walk.ancestor(res, {
+      CallExpression(node, ancestors) {
+        if (_.get(node, "callee.name", "") === "getBooksAndMoviesAsync") {
+          ancestors.map(val => {
+            if (
+              val.type === "CallExpression" &&
+              _.get(val, "arguments[0].params[0].name", "") === "results"
+            )
+              parent.node = val;
+          });
+        }
       }
     });
 
